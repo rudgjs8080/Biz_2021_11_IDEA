@@ -1,0 +1,26 @@
+div.d_student_list {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 1rem auto;
+}
+div.student_list_td,
+div.student_list_tr {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem;
+}
+div.student_list_tr div,
+div.student_list_td div{
+    flex: 1;
+    text-align: center;
+}
+div.student_list_tr{
+    background-color: #ccc;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+div.student_list_td {
+    border-bottom: 1px solid #ddd;
+}
+
