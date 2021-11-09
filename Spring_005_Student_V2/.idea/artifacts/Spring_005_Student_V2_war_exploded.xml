@@ -83,6 +83,9 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.12" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.3.12" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.18.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.9.6" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.3.9.RELEASE" />
         </element>
       </element>
     </root>

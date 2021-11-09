@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin: 0;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: green;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+}
+footer {
+    background-color: black;
+    color:white;
+    text-align: center;
+    padding: 1rem;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+section.content {
+    flex:1;
+}
+fieldset {
+    width:60%;
+    margin: 0.5rem auto;
+    text-align: center;
+    border: none;
+}
+fieldset div {
+    margin: 0.1rem;
+    width: 80%;
+    border-radius: 15px;
+}
+fieldset input {
+    width: 80%;
+}
+.btn_box {
+    width:50%;
+    margin: 0 50%;
+}
+.btn_box button{
+    padding: 5px;
+}
+.btn1 {
+    background-color: aquamarine;
+}
+.btn2 {
+    background-color: bisque;
+}
+.btn3{
+    background-color: crimson;
+}
