@@ -55,8 +55,7 @@
     <context:component-scan base-package="com.callor.sec.service.auth" />
 <!--    <bean id="loginService" class="com.callor.sec.service.auth.LoginService"/>-->
     <security:authentication-manager>
-        <security:authentication-provider
-                ref="authenticationProvider"
-                user-service-ref="loginService"/>
+        <security:authentication-provider ref="authenticationProvider"/>
+        <security:authentication-provider user-service-ref="loginService"/>
     </security:authentication-manager>
 </beans>
