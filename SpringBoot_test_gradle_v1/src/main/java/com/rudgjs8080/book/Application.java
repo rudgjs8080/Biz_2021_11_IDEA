@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * Application Class
  * 앞으로 만들 프로젝트의 메인 클래스
  */
-@EnableJpaAuditing // JPA Auditing 활성화
+// @EnableJpaAuditing // JPA Auditing 활성화
 @SpringBootApplication
 public class Application {
 
