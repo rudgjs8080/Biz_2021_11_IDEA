@@ -21,6 +21,9 @@ public class User {
     private String email;
     private String role;
 
+    private String provider;
+    private String provider_id;
+
     @CreationTimestamp
     private Timestamp createDate;
 }

@@ -1,11 +1,14 @@
 package com.rudgjs8080.security.config.auth;
 
 import com.rudgjs8080.security.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * 시큐리티가 /login 주소를 낚아채서 로그인을 진행시킴
@@ -18,13 +21,19 @@ import java.util.Collection;
  * Security Session => Authentication => UserDetails(PrincipalDetails)
  *
  */
-public class PrincipalDetails implements UserDetails {
+@Getter
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user; // composition ??
 
     // 생성자
     public PrincipalDetails(User user){
         this.user = user;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
     }
 
     /**
@@ -75,5 +84,10 @@ public class PrincipalDetails implements UserDetails {
 
 
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }
