@@ -42,9 +42,8 @@ public class IndexController {
     public String testOAuthLogin(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth){ // DI (의존성 주입)
         System.out.println("/test/oauth/login=========");
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        System.out.println("authentication : " + oAuth2User.getAttributes());
+        System.out.println("authentication : " + oAuth2User.getAttributes()); // 이 정보로 user object 를 구성
         System.out.println("oauth2User : " + oAuth.getAttributes());
-
 
         return "OAuth 세션 정보 확인하기";
     }
@@ -54,9 +53,14 @@ public class IndexController {
         return "index";
     }
 
+    // OAuth 로그인을 해도 PrincipalDetails
+    // 일반 로그인을 해도 PrincipalDetails
+    // @AuthenticationPrincipal 은
     @ResponseBody
     @GetMapping("/user")
-    public String user() {
+    public String user(@AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        System.out.println("principalDetails : " + principalDetails.getUser());
         return "user";
     }
 

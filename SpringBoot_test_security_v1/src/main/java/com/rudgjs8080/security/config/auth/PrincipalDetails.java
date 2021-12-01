@@ -25,16 +25,21 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user; // composition ??
+    private Map<String, Object> attributes;
 
-    // 생성자
+    // 일반 로그인 생성자
     public PrincipalDetails(User user){
         this.user = user;
     }
 
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
+    // OAuth 로그인 생성자
+    // 로그인시 principalDetails에 User, Map 둘다 담기게됨
+    public PrincipalDetails(User user,Map<String, Object> attributes){
+
+        this.user = user;
+        this.attributes = attributes;
     }
+
 
     /**
      * 해당 User의 권한을 리턴하는 곳
@@ -81,9 +86,13 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     @Override
     public boolean isEnabled() {
         // 우리 사이트에서 1년동안 회원이 로그인을 안하면 휴면계정으로 전환되기로 한다면
-
-
         return true;
+    }
+
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 
     @Override
