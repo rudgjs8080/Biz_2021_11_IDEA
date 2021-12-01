@@ -88,12 +88,13 @@ public class IndexController {
 
     @PostMapping("/join")
     public String join(User user) {
-        System.out.println(user);
+        System.out.println(">>>>>>>>>>>>>>>>user : " + user);
         user.setRole("ROLE_USER");
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
         userRepository.save(user);
+        System.out.println(">>>>>>>>>>>After User : " + user);
         return "redirect:/loginForm";
     }
     @Secured("ROLE_ADMIN") // 특정 method 에 간단하게 security 를 걸고 싶을 때 사용

@@ -13,4 +13,9 @@
 * 그렇기 때문에 PrincipalDetails 에 implements UserDetails 하게 되면
 * PrincipalDetails 가 user object 를 가지게됨
 * OAuth2User 도 principal implement 하면 합쳐지게 됨
-* 
+
+## OAuth2-Client 사용중
+* provider -> google, facebook, twitter ... 등의 기본제공자가 있음
+* Naver나 kakao는 기본제공자에 없음
+* 나라마다 대형포털사이트가 다르기 때문에 & getAttribute 값이 각자 다 다름
+* ex) id: 1234~~(facebook), sub: 1234~ (google)

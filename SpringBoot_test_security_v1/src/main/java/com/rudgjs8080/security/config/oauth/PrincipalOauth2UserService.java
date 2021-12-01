@@ -1,6 +1,10 @@
 package com.rudgjs8080.security.config.oauth;
 
 import com.rudgjs8080.security.config.auth.PrincipalDetails;
+import com.rudgjs8080.security.config.oauth.provider.FacebookInfo;
+import com.rudgjs8080.security.config.oauth.provider.GoogleUserInfo;
+import com.rudgjs8080.security.config.oauth.provider.NaverUserInfo;
+import com.rudgjs8080.security.config.oauth.provider.OAuth2UserInfo;
 import com.rudgjs8080.security.model.User;
 import com.rudgjs8080.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +15,11 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.Optional;
+
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
-
-
-
 
     @Autowired
     private UserRepository userRepository;
@@ -32,23 +36,42 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         // oAuth2User 와 super.loadUser(userRequest) 는 같다
         System.out.println("getAttributes : " + oAuth2User.getAttributes());
 
-        String provider = userRequest.getClientRegistration().getRegistrationId(); // google
-        String providerId = oAuth2User.getAttribute("sub"); // google 의 sub
-        String username = provider + "_" + providerId; //google_sub 형식 다른 네이버, facebook 로그인과 충돌 방지
-        String email = oAuth2User.getAttribute("email");
+        OAuth2UserInfo oAuth2UserInfo = null;
+        if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
+            System.out.println("구글 로그인 요청");
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else if(userRequest.getClientRegistration().getRegistrationId().equals("facebook")){
+            System.out.println("페이스북 로그인 요청");
+            oAuth2UserInfo = new FacebookInfo(oAuth2User.getAttributes());
+        } else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")){
+            System.out.println("네이버 로그인 요청");
+            oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
+        }
+        else {
+            System.out.println("구글과 페이스북만 지원함");
+        }
+
+
+        String provider = oAuth2UserInfo.getProvider();
+        String providerId = oAuth2UserInfo.getProviderId();
+        String username = provider + "_" + providerId;
+        String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
         User userEntity = userRepository.findByUsername(username);
         if(userEntity == null){
+            System.out.println("최초 로그인 입니다");
             userEntity =User.builder()
                     .username(username)
                     .email(email)
                     .role(role)
                     .provider(provider)
-                    .provider_id(providerId)
+                    .providerId(providerId)
                     .build();
             userRepository.save(userEntity);
         }
+
+
 
         // return 을 하게되면 PrincipalDetails를 만들어서 Authentication 에 들어가게 될 것
         return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
