@@ -50,6 +50,10 @@ public class Order {
     }
 
     // 생성 메서드
+
+    /**
+     * 주문 생성 로직 집합
+     */
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems){
         Order order = new Order();
         order.setMember(member);
