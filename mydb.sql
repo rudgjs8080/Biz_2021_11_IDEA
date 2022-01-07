@@ -14,6 +14,9 @@ select * from tbl_team;
 select * from tbl_team_schedule;
 select * from tbl_room;
 
+insert into tbl_team values("Team22","1234","aa Title101","tester1");
+
+
 select *
 from tbl_room R left join tbl_team T
 	on R.team_id = T.t_team_id
@@ -41,5 +44,9 @@ where tbl_team;
  SHOW INDEXES IN tbl_team;
  
  select * from information_schema.table_constraints where table_schema="meettdb" and table_name="tbl_team";
+ 
+ select * from tbl_room where team_id = "Team5";
+ 
+ update tbl_team_schedule set role = 1 where seq = 51;
  
  
